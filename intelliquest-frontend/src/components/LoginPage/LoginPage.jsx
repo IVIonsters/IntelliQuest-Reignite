@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Box, Button, Input, FormControl, FormLabel, Heading } from "@chakra-ui/react";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "../../firebase/auth";
-import { useAuth } from "../contexts/authContext";
+import { useAuth } from "../contexts/authContext/index.jsx";
 import { Navigate } from "react-router-dom";
 
 function LoginPage() {
@@ -37,7 +37,7 @@ function LoginPage() {
 
   return (
     <>
-      {/* {userLoggedIn && <Navigate to="/dashboard" />} */}
+      {/* {userLoggedIn && <Navigate to="/LandingPage" />} */}
       <Box maxW="400px" mx="auto" mt="10">
         <Heading mb="6" textAlign="center">Login</Heading>
         <FormControl mb="4">

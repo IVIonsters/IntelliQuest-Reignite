@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import LandingPage from "./components/landingPage/landingPage";
 import LoginPage from "./components/LoginPage/loginPage";
