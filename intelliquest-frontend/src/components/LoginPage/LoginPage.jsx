@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/authContext/index.jsx";
 import { Navigate } from "react-router-dom";
 
 function LoginPage() {
-  // const { userLoggedIn } = useAuth();
+  const { userLoggedIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
@@ -37,7 +37,7 @@ function LoginPage() {
 
   return (
     <>
-      {/* {userLoggedIn && <Navigate to="/LandingPage" />} */}
+      {userLoggedIn && <Navigate to="/profile" />}
       <Box maxW="400px" mx="auto" mt="10">
         <Heading mb="6" textAlign="center">Login</Heading>
         <FormControl mb="4">

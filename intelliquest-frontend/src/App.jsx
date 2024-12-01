@@ -6,6 +6,7 @@ import "./App.css";
 import LandingPage from "./components/landingPage/landingPage";
 import LoginPage from "./components/LoginPage/loginPage";
 import SignUpPage from "./components/SignUpPage/SignUpPage";
+import UserProfile from "./components/UserProfile/UserProfile";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Routes>
     </Router>
   );
