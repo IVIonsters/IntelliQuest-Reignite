@@ -1,45 +1,47 @@
 /* eslint-disable no-unused-vars */
-import * as React from "react";
-import "./landingPage.css"; // Importing CSS for additional styling
-import Button from '@mui/material/Button'; // Importing Material-UI Button component
-import Box from '@mui/material/Box'; // Importing Material-UI Box component for layout
-import ButtonGroup from '@mui/material/ButtonGroup'; // Importing Material-UI ButtonGroup component
-import Container from '@mui/material/Container'; // Importing Material-UI Container component
-
-// Array of buttons with margin applied to each button
-const buttons = [
-  <Button key="one">Login</Button>,
-  <Button key="two">Sign Up</Button>,
-];
+import React from "react";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
+  const navigate = useNavigate(); // Initialize the navigate function
+
   return (
-    <Container
-      maxWidth="sm" // Sets the maximum width of the container to small
-      sx={{
-        display: 'flex', // Flexbox layout
-        flexDirection: 'column', // Column direction for flex items
-        alignItems: 'center', // Center align items horizontally
-        justifyContent: 'center', // Center align items vertically
-        height: '100vh', // Full viewport height
-      }}
-    >
-      <Box
-        sx={{
-          display: 'flex', // Flexbox layout
-          flexDirection: 'column', // Column direction for flex items
-          alignItems: 'center', // Center align items horizontally
-          justifyContent: 'center', // Center align items vertically
-          '& > *': {
-            m: 1, // Margin for each child element
-          },
-        }}
+    <Box>
+      {/* Header */}
+      <Flex as="header" justify="space-between" p={4} bg="cyan.500" color="black">
+        <Heading size="lg">IntelliQuest</Heading>
+        <Flex gap={4}>
+          <Button variant="ghost" color="black" onClick={() => navigate("/login")}>
+            Login
+          </Button>
+          <Button color="black" bg="white" onClick={() => navigate("/signup")}>
+            Sign Up
+          </Button>
+        </Flex>
+      </Flex>
+
+      {/* Hero Section */}
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        height="80vh"
+        bg="gray.50"
+        textAlign="center"
+        px={4}
       >
-        <ButtonGroup color="secondary" size="large" aria-label="Large button group">
-          {buttons}
-        </ButtonGroup>
-      </Box>
-    </Container>
+        <Heading size="2xl" mb={4}>
+          Welcome to IntelliQuest
+        </Heading>
+        <Text fontSize="lg" color="gray.600" mb={6}>
+          Your gateway to the best developer resources, study tools, and community.
+        </Text>
+        <Button size="lg" color="black" onClick={() => navigate("/signup")}>
+          Get Started
+        </Button>
+      </Flex>
+    </Box>
   );
 }
 
