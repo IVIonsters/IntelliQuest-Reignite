@@ -17,37 +17,46 @@ import { auth, db } from "../../firebase/firebase";
 import { setDoc, doc } from "firebase/firestore";
 
 function SignUpPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
+  // State variables for form inputs
+  const [email, setEmail] = useState(""); // Stores the email entered by the user
+  const [password, setPassword] = useState(""); // Stores the password entered by the user
+  const [fname, setFname] = useState(""); // Stores the first name entered by the user
+  const [lname, setLname] = useState(""); // Stores the last name entered by the user
 
-  const toast = useToast();
+  const toast = useToast(); // Chakra UI hook for showing toast notifications
 
+  // Function to handle the registration process
   const handleRegister = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevents the default form submission behavior
+
     try {
+      // Create a new user with email and password using Firebase Authentication
       await createUserWithEmailAndPassword(auth, email, password);
-      const user = auth.currentUser;
-      console.log(user);
+      const user = auth.currentUser; // Get the currently authenticated user
+      console.log(user); // Log user data to the console for debugging
+
       if (user) {
+        // If user creation is successful, save additional user data to Firestore
         await setDoc(doc(db, "Users", user.uid), {
           email: user.email,
           firstName: fname,
           lastName: lname,
-          photo: ""
+          photo: "", // Placeholder for photo URL (can be updated later)
         });
       }
       console.log("User Registered Successfully!!");
+
+      // Show success notification
       toast({
         title: "User Registered Successfully!!",
         status: "success",
         position: "top-center",
       });
     } catch (error) {
+      // Log the error to the console and show an error notification
       console.log(error.message);
       toast({
-        title: error.message,
+        title: error.message, // Display the error message in the toast
         status: "error",
         position: "bottom-center",
       });
@@ -56,19 +65,23 @@ function SignUpPage() {
 
   return (
     <Box
-      maxW="400px"
-      mx="auto"
-      mt="10"
-      p="6"
-      boxShadow="lg"
-      borderRadius="lg"
-      bg="white"
+      maxW="400px" // Maximum width of the form container
+      mx="auto" // Horizontally centers the container
+      mt="10" // Adds margin at the top
+      p="6" // Adds padding inside the container
+      boxShadow="lg" // Adds a shadow effect
+      borderRadius="lg" // Makes the corners rounded
+      bg="white" // Sets the background color to white
     >
+      {/* Heading for the form */}
       <Heading as="h3" size="lg" textAlign="center" mb="6">
         Sign Up
       </Heading>
+
+      {/* Form for user registration */}
       <form onSubmit={handleRegister}>
-        <VStack spacing="4">
+        <VStack spacing="4"> {/* Vertically stack the form fields with spacing */}
+          {/* First Name Input */}
           <FormControl isRequired>
             <FormLabel>First Name</FormLabel>
             <Input
@@ -79,6 +92,7 @@ function SignUpPage() {
             />
           </FormControl>
 
+          {/* Last Name Input */}
           <FormControl>
             <FormLabel>Last Name</FormLabel>
             <Input
@@ -89,6 +103,7 @@ function SignUpPage() {
             />
           </FormControl>
 
+          {/* Email Input */}
           <FormControl isRequired>
             <FormLabel>Email Address</FormLabel>
             <Input
@@ -99,6 +114,7 @@ function SignUpPage() {
             />
           </FormControl>
 
+          {/* Password Input */}
           <FormControl isRequired>
             <FormLabel>Password</FormLabel>
             <Input
@@ -109,16 +125,18 @@ function SignUpPage() {
             />
           </FormControl>
 
+          {/* Sign Up Button */}
           <Button
             type="submit"
-            colorScheme="blue"
-            width="full"
+            colorScheme="blue" // Uses Chakra UI's blue color scheme
+            width="full" // Makes the button take the full width of the container
           >
             Sign Up
           </Button>
         </VStack>
       </form>
 
+      {/* Link to the Login page */}
       <Text mt="4" textAlign="center">
         Already registered?{" "}
         <Link color="blue.500" href="/login">
@@ -130,3 +148,4 @@ function SignUpPage() {
 }
 
 export default SignUpPage;
+
