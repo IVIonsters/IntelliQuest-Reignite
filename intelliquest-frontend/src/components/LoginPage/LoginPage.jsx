@@ -4,6 +4,8 @@ import { Box, Button, Input, FormControl, FormLabel, Heading } from "@chakra-ui/
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "../../firebase/auth";
 import { useAuth } from "../contexts/authContext/index.jsx";
 import { Navigate } from "react-router-dom";
+import { auth, db } from "../../firebase/firebase";
+import { setDoc, doc } from "firebase/firestore";
 
 function LoginPage() {
   const { userLoggedIn } = useAuth();
@@ -22,16 +24,30 @@ function LoginPage() {
     }
   };
 
-  const handleGoogleLogin = (e) => {
+  const handleGoogleLogin = async (e) => {
     e.preventDefault();
     console.log("Logging in with Google");
-    //! Add Firebase authentication logic here
     if (!isSigningIn) {
       setIsSigningIn(true);
-      doSignInWithGoogle().catch(err => {
+      try {
+        const result = await doSignInWithGoogle();
+        const user = result.user;
+
+        // Save user data to Firestore if it's their first login
+        const userDocRef = doc(db, "Users", user.uid);
+        await setDoc(userDocRef, {
+          email: user.email,
+          firstName: user.displayName.split(" ")[0],
+          lastName: user.displayName.split(" ")[1] || "",
+          photo: user.photoURL || "",
+        }, { merge: true }); // Merge prevents overwriting existing data
+
+        console.log("Google Login Successful");
+      } catch (err) {
+        console.error("Error signing in with Google:", err);
+      } finally {
         setIsSigningIn(false);
-        console.error(err + "Error signing in with Google");
-      })
+      }
     }
   };
 
