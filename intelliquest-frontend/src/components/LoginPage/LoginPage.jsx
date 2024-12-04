@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { Box, Button, Input, FormControl, FormLabel, Heading } from "@chakra-ui/react";
+import { Box, Button, Input, FormControl, FormLabel, Heading, Flex } from "@chakra-ui/react";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "../../firebase/auth";
 import { useAuth } from "../contexts/authContext/index.jsx";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom"; // Import useNavigate
 import { auth, db } from "../../firebase/firebase";
 import { setDoc, doc } from "firebase/firestore";
 
@@ -13,6 +13,7 @@ function LoginPage() {
   const [password, setPassword] = useState(""); // Stores the password entered by the user
   const [isSigningIn, setIsSigningIn] = useState(false); // Tracks whether a login process is in progress
   const [errorMessage, setErrorMessage] = useState(""); // Stores error messages for display
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Handle login with email and password
   const handleLogin = async (e) => {
@@ -71,6 +72,21 @@ function LoginPage() {
       {/* Redirect logged-in users to the profile page */}
       {userLoggedIn && <Navigate to="/profile" />}
 
+      {/* Header section with app name and navigation buttons */}
+      <Flex as="header" justify="space-between" p={4} bg="cyan.500" color="black">
+        <Heading size="lg">IntelliQuest</Heading>
+        <Flex gap={4}>
+          {/* Login button navigates to the login page */}
+          <Button variant="ghost" color="black" onClick={() => navigate("/login")}>
+            Profile
+          </Button>
+          {/* Sign Up button navigates to the signup page */}
+          <Button color="black" bg="white" onClick={() => navigate("/dashboard")}>
+            dashboard
+          </Button>
+        </Flex>
+      </Flex>
+
       {/* Login form */}
       <Box maxW="400px" mx="auto" mt="10">
         <Heading mb="6" textAlign="center">Login</Heading>
@@ -111,4 +127,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
