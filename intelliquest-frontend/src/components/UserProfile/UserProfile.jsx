@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { Box, Button, Center, Flex, Heading, Image, Spinner, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Center, Image, Spinner, Text, VStack } from "@chakra-ui/react";
 import { auth, db } from "../../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
@@ -73,21 +73,37 @@ function Profile() {
   return (
     <Box>
       {/* Header section with app name and navigation buttons */}
-      <Flex as="header" justify="space-between" p={4} bg="cyan.500" color="black">
-        <Heading size="lg">IntelliQuest</Heading>
+      <Flex
+        as="header"
+        justify="space-between"
+        align="center"
+        p={4}
+        bgGradient="linear(to-r, teal.500, green.500)"
+        color="white"
+        boxShadow="md"
+        position="fixed"
+        top="0"
+        width="100%"
+        zIndex="1000"
+      >
+        <Flex align="center">
+          <Box />
+          <Heading size="lg">IntelliQuest</Heading>
+        </Flex>
         <Flex gap={4}>
-          {/* Login button navigates to the login page */}
-          <Button variant="ghost" color="black" onClick={() => navigate("/profile")}>
+          {/* Profile button navigates to the profile page */}
+          <Button variant="outline" colorScheme="whiteAlpha" onClick={() => navigate("/profile")}>
             Profile
           </Button>
-          {/* Sign Up button navigates to the signup page */}
-          <Button color="black" bg="white" onClick={() => navigate("/dashboard")}>
-            dashboard
+          {/* Dashboard button navigates to the dashboard page */}
+          <Button variant="solid" colorScheme="whiteAlpha" onClick={() => navigate("/dashboard")}>
+            Dashboard
           </Button>
         </Flex>
       </Flex>
 
-      <Box maxW="600px" mx="auto" mt="10" p="6" boxShadow="lg" borderRadius="lg" bg="white">
+      {/* Add padding to the top of the main content to account for the fixed header */}
+      <Box maxW="600px" mx="auto" mt="16" p="6" boxShadow="lg" borderRadius="lg" bg="white">
         {error ? (
           // Display error message if there is an error
           <Center>
@@ -122,7 +138,7 @@ function Profile() {
             </Box>
 
             {/* Logout Button */}
-            <Button colorScheme="red" onClick={handleLogout} width="full">
+            <Button colorScheme="gray" onClick={handleLogout} width="25%">
               Logout
             </Button>
           </VStack>
