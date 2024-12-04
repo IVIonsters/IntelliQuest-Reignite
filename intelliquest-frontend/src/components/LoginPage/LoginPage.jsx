@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { Box, Button, Input, FormControl, FormLabel, Heading, Flex } from "@chakra-ui/react";
+import { Box, Button, Input, FormControl, FormLabel, Heading, Flex, Text, Alert, AlertIcon } from "@chakra-ui/react";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "../../firebase/auth";
 import { useAuth } from "../contexts/authContext/index.jsx";
 import { Navigate, useNavigate } from "react-router-dom"; // Import useNavigate
 import { auth, db } from "../../firebase/firebase";
 import { setDoc, doc } from "firebase/firestore";
+import { FcGoogle } from "react-icons/fc"; // Import Google icon
 
 function LoginPage() {
   const { userLoggedIn } = useAuth(); // Check if the user is already logged in
@@ -73,54 +74,115 @@ function LoginPage() {
       {userLoggedIn && <Navigate to="/profile" />}
 
       {/* Header section with app name and navigation buttons */}
-      <Flex as="header" justify="space-between" p={4} bg="cyan.500" color="black">
-        <Heading size="lg">IntelliQuest</Heading>
+      <Flex
+        as="header"
+        justify="space-between"
+        align="center"
+        p={4}
+        bgGradient="linear(to-r, teal.500, green.500)"
+        color="white"
+        boxShadow="md"
+        position="fixed"
+        width="100%"
+        zIndex="1000"
+      >
+        <Flex align="center">
+          <Box />
+          <Heading size="lg">IntelliQuest</Heading>
+        </Flex>
         <Flex gap={4}>
-          {/* Login button navigates to the login page */}
-          <Button variant="ghost" color="black" onClick={() => navigate("/login")}>
+          {/* Profile button navigates to the profile page */}
+          <Button variant="outline" colorScheme="whiteAlpha" onClick={() => navigate("/profile")}>
             Profile
           </Button>
-          {/* Sign Up button navigates to the signup page */}
-          <Button color="black" bg="white" onClick={() => navigate("/dashboard")}>
-            dashboard
+          {/* Dashboard button navigates to the dashboard page */}
+          <Button variant="solid" colorScheme="whiteAlpha" onClick={() => navigate("/dashboard")}>
+            Dashboard
           </Button>
         </Flex>
       </Flex>
 
-      {/* Login form */}
-      <Box maxW="400px" mx="auto" mt="10">
-        <Heading mb="6" textAlign="center">Login</Heading>
-        {/* Email input field */}
-        <FormControl mb="4">
-          <FormLabel>Email</FormLabel>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-          />
-        </FormControl>
+      {/* Background Image */}
+      <Box
+        minH="90vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        {/* Login form with glassmorphism effect */}
+        <Box
+          maxW="400px"
+          w="full"
+          p="8"
+          bg="rgba(255, 255, 255, 0.1)"
+          boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
+          backdropFilter="blur(10px)"
+          borderRadius="lg"
+          border="1px solid black"
+        >
+          <Heading mb="6" textAlign="center" color="black">Login</Heading>
 
-        {/* Password input field */}
-        <FormControl mb="6">
-          <FormLabel>Password</FormLabel>
-          <Input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-          />
-        </FormControl>
+          {/* Display error message */}
+          {errorMessage && (
+            <Alert status="error" mb="4">
+              <AlertIcon />
+              {errorMessage}
+            </Alert>
+          )}
 
-        {/* Login button */}
-        <Button color="white" bg="black" width="100%" onClick={handleLogin}>
-          Login
-        </Button>
+          {/* Email input field */}
+          <FormControl mb="4">
+            <FormLabel color="black">Email</FormLabel>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              bg="rgba(255, 255, 255, 0.2)"
+              color="black"
+              border="1px solid black"
+              _placeholder={{ color: 'black' }}
+            />
+          </FormControl>
 
-        {/* Google Login button */}
-        <Button color="white" bg="black" width="100%" mt="2" onClick={handleGoogleLogin}>
-          Google Login
-        </Button>
+          {/* Password input field */}
+          <FormControl mb="6">
+            <FormLabel color="black">Password</FormLabel>
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              bg="rgba(255, 255, 255, 0.2)"
+              color="black"
+              border="1px solid black"
+              _placeholder={{ color: 'black' }}
+            />
+          </FormControl>
+
+          {/* Login button */}
+          <Button
+            border="1px solid black"
+            colorScheme="white"
+            color="black"
+            width="full"
+            mb="4"
+            onClick={handleLogin}>
+            Login
+          </Button>
+
+          {/* Google Login button */}
+          <Button
+            border="1px solid black"
+            colorScheme="white"
+            color="black"
+            width="full"
+            onClick={handleGoogleLogin}
+            leftIcon={<FcGoogle />}
+          >
+            Continue with Google
+          </Button>
+        </Box>
       </Box>
     </>
   );
