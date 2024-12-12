@@ -97,6 +97,20 @@
 
 <p align="right">(<a href="#intelliquest">back to top</a>)</p>
 
+## Screenshots
+
+| <img src="./images/screencapture-localhost-5173-2024-12-11-21_28_43.png" width="400"> | <img src="./images/screencapture-localhost-5173-2024-12-11-21_28_18.png\" width="400"> |
+| :-----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
+|                                IntelliQuest on Desktop                                |                                 IntelliQuest on Mobile                                 |
+
+<p align="right">(<a href="#intelliquest">back to top</a>)</p>
+
+## Demo
+
+![IntelliQuest Demo](./images/demo.gif)
+
+<p align="right">(<a href="#intelliquest">back to top</a>)</p>
+
 ## Installation
 
 To set up the IntelliQuest project locally, follow these steps:
