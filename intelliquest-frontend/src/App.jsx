@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import LandingPage from "./components/landingPage/landingPage";
-import LoginPage from "./components/LoginPage/loginPage";
+import LoginPage from "./components/LoginPage/LoginPage";
 import SignUpPage from "./components/SignUpPage/SignUpPage";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Dashboard from "./components/dashboard/Dashboard";
