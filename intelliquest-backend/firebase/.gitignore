@@ -26,3 +26,4 @@ dist-ssr
 intelliquest-backend/.env
 intelliquest-backend/firebase/intelliquest-login-firebase-adminsdk-wlvls-7c17545cf6.json
 intelliquest-backend/.env
+.env

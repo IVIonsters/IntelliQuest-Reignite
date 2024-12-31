@@ -87,24 +87,98 @@ function LandingPage() {
 
       {/* Hero section with a welcome message and call-to-action */}
       <Flex
-        direction="column"
+        height="85vh"
+        bgGradient="linear(to-br, teal.500, green.500)"
         align="center"
         justify="center"
-        height="80vh"
-        bg="gray.50"
-        textAlign="center"
-        px={4}
+        p={4}
       >
-        <Heading size="2xl" mb={4}>
-          Welcome to IntelliQuest
-        </Heading>
-        <Text fontSize="lg" color="gray.600" mb={6}>
-          Your gateway to the best developer resources, study tools, and community.
-        </Text>
-        <Button size="lg" color="black" onClick={() => navigate("/signup")}>
-          Get Started
-        </Button>
+        <Box
+          maxW="3xl"
+          width="full"
+          backdropFilter="blur(10px)"
+          bg="rgba(255, 255, 255, 0.2)"
+          p={6}
+          borderRadius="md"
+          boxShadow="lg"
+          border="1px solid rgba(255, 255, 255, 0.3)"
+        >
+          <Heading
+            as="h1"
+            size="2xl"
+            mb={4}
+            color="white"
+            textAlign="center"
+            fontWeight="extrabold"
+          >
+            Welcome to{" "}
+            <Text
+              as="span"
+              bgGradient="linear(to-r, teal.200, green.200)"
+              bgClip="text"
+            >
+              IntelliQuest
+            </Text>
+          </Heading>
+          <Text fontSize="lg" mb={6} color="whiteAlpha.900" textAlign="center">
+            Empower your learning journey with curated developer resources and tools.
+          </Text>
+          <Flex
+            direction={{ base: "column", sm: "row" }}
+            justify="center"
+            align="center"
+            gap={4}
+          >
+            <Button
+              size="lg"
+              variant="outline"
+              color="white"
+              borderColor="whiteAlpha.800"
+              _hover={{ bg: "whiteAlpha.300", borderColor: "white" }}
+              onClick={() => navigate("/resources")}
+            >
+              Explore Resources
+            </Button>
+            <Button
+              size="lg"
+              bgGradient="linear(to-r, teal.300, green.300)"
+              _hover={{ bgGradient: "linear(to-r, teal.400, green.400)" }}
+              color="white"
+              fontWeight="semibold"
+              onClick={() => navigate("/signup")}
+            >
+              Join Us
+            </Button>
+          </Flex>
+          <Flex
+            mt={8}
+            gridGap={4}
+            flexDirection={{ base: "column", sm: "row" }}
+            justify="center"
+          >
+            {["Handcrafted", "Unique", "Sustainable"].map((feature, index) => (
+              <Box
+                key={index}
+                bg="rgba(255, 255, 255, 0.2)"
+                p={4}
+                borderRadius="md"
+                backdropFilter="blur(5px)"
+                textAlign="center"
+                border="1px solid rgba(255, 255, 255, 0.3)"
+              >
+                <Heading as="h2" size="md" mb={2} color="white">
+                  {feature}
+                </Heading>
+                <Text fontSize="sm" color="whiteAlpha.800">
+                  Our resources are {feature.toLowerCase()} and made with care.
+                </Text>
+              </Box>
+            ))}
+          </Flex>
+        </Box>
       </Flex>
+
+
     </Box>
   );
 }
